@@ -7,7 +7,10 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="https://cdn.tailwindcss.com"></script>
+    
+        <!-- Scripts -->
+        @vite(['resources/js/app.js'])
     </head>
     <body>
         <div>
