@@ -36,6 +36,7 @@ Route::post('deletepost',
 )->name('deletepost');
 
 // Comments
+
 Route::post('createcomment', 
     [CommentController::class, 'create']
 )->name('createcomment');
