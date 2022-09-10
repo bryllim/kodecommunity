@@ -41,7 +41,10 @@
                 </div>
                 <div class="w-full flex flex-col space-y-2 p-2 px-4">
                     <div class="flex items-center justify-between pb-2 border-b border-gray-300 text-gray-500 text-xs">
-                        <div class="flex items-center space-x-2"><button>{{ count($post->comments) }} {{ (count($post->comments)==1)?'comment':'comments' }}</button>
+                        <div class="flex items-center space-x-2"><button>0 likes</button>
+                        </div>
+                        <div class="flex items-center space-x-2"><button>{{ count($post->comments) }}
+                                {{ (count($post->comments)==1)?'comment':'comments' }}</button>
                         </div>
                     </div>
 
@@ -63,13 +66,26 @@
                         <input type="text" class="rounded-md w-full mb-1 border-2 focus:outline-none p-2 text-xs"
                             placeholder="Add a comment..." name="content">
                         <input type="hidden" name="post_id" value="{{ $post->id }}">
-                        <div class="flex space-x-3 text-gray-500 text-sm font-thin"><button type="submit"
-                                class="flex-1 flex items-center h-8 focus:outline-none focus:bg-gray-200 justify-center space-x-2 hover:bg-gray-100 rounded-md">
-                                <div><i class="fas fa-comment"></i></div>
-                                <div>
-                                    <p class="font-semibold">Comment</p>
+                        <div class="space-x-3 text-gray-500 text-sm font-thin">
+                            <div class="grid grid-flow-col">
+                                <div class="mx-auto px=-">
+                                    <button type="submit"
+                                        class="items-center h-8 focus:outline-none focus:bg-gray-200 justify-center space-x-2 hover:bg-gray-100 rounded-md">
+                                        <div>
+                                            <p class="font-semibold px-5">Like</p>
+                                        </div>
+                                    </button>
                                 </div>
-                            </button></div>
+                                <div class="col-span-9">
+                                    <button type="submit"
+                                        class="items-center h-8 focus:outline-none focus:bg-gray-200 justify-center space-x-2 hover:bg-gray-100 rounded-md w-full">
+                                        <div>
+                                            <p class="font-semibold">Comment</p>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </form>
 
                 </div>
