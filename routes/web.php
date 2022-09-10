@@ -29,4 +29,8 @@ Route::post('createpost',
     [PostsController::class, 'create']
 )->name('createpost');
 
+Route::post('deletepost', 
+    [PostsController::class, 'delete']
+)->name('deletepost');
+
 require __DIR__.'/auth.php';

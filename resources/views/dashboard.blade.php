@@ -24,9 +24,14 @@
                             class="text-xs font-thin text-gray-400">{{ $post->updated_at->diffForHumans() }}</span>
                     </div>
                     @if($post->user_id == Auth::user()->id)
-                    <div class="w-8 h-8"><button
+
+                    <form onsubmit="return confirm('Do you really want to delete this post?');" action="{{ route('deletepost') }}" method="post">
+                    @csrf
+                    <div class="w-8 h-8"><input type="hidden" name="post_id" value="{{ $post->id }}"><button type="submit"
                             class="w-full h-full hover:bg-red-100 rounded-full text-red-400 focus:outline-none">✖</button>
                     </div>
+                        
+                    </form>
                     @endif
                 </div>
                 <div class="mb-1">
