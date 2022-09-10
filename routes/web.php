@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\CommentController;
 use App\Models\Post;
+use App\Models\Comment;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +22,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard')->with('posts', Post::all());
+    return view('dashboard')->with('posts', Post::orderBy('updated_at', 'desc')->get());
 })->middleware(['auth'])->name('dashboard');
 
 // Posts
@@ -32,5 +34,11 @@ Route::post('createpost',
 Route::post('deletepost', 
     [PostsController::class, 'delete']
 )->name('deletepost');
+
+// Comments
+Route::post('createcomment', 
+    [CommentController::class, 'create']
+)->name('createcomment');
+
 
 require __DIR__.'/auth.php';

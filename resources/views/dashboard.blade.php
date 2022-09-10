@@ -14,7 +14,7 @@
                 </div>
             </div>
             @endif
-            @foreach($posts->reverse() as $post)
+            @foreach($posts as $post)
             <div class="w-full shadow h-auto bg-white rounded-md mb-3">
                 <div class="flex items-center space-x-2 p-2.5 px-4">
                     <div class="w-10 h-10"><img src="https://cdn-icons-png.flaticon.com/512/1803/1803671.png"
@@ -25,12 +25,14 @@
                     </div>
                     @if($post->user_id == Auth::user()->id)
 
-                    <form onsubmit="return confirm('Do you really want to delete this post?');" action="{{ route('deletepost') }}" method="post">
-                    @csrf
-                    <div class="w-8 h-8"><input type="hidden" name="post_id" value="{{ $post->id }}"><button type="submit"
-                            class="w-full h-full hover:bg-red-100 rounded-full text-red-400 focus:outline-none">✖</button>
-                    </div>
-                        
+                    <form onsubmit="return confirm('Do you really want to delete this post?');"
+                        action="{{ route('deletepost') }}" method="post">
+                        @csrf
+                        <div class="w-8 h-8"><input type="hidden" name="post_id" value="{{ $post->id }}"><button
+                                type="submit"
+                                class="w-full h-full hover:bg-red-100 rounded-full text-red-400 focus:outline-none">✖</button>
+                        </div>
+
                     </form>
                     @endif
                 </div>
@@ -42,13 +44,34 @@
                         <div class="flex items-center space-x-2"><button>52 Comments</button>
                         </div>
                     </div>
-                    <div class="flex space-x-3 text-gray-500 text-sm font-thin"><button
-                            class="flex-1 flex items-center h-8 focus:outline-none focus:bg-gray-200 justify-center space-x-2 hover:bg-gray-100 rounded-md">
-                            <div><i class="fas fa-comment"></i></div>
-                            <div>
-                                <p class="font-semibold">Comment</p>
-                            </div>
-                        </button></div>
+
+                    @foreach($post->comments as $comment)
+                    <div class="flex items-center space-x-2 p-1 px-4 bg-gray-100 rounded-md">
+                        <div class="w-7 h-7"><img src="https://cdn-icons-png.flaticon.com/512/1803/1803671.png"
+                                class="w-full h-full rounded-full" alt="dp"></div>
+                        <div class="flex-grow flex flex-col">
+                            <p class="font-semibold text-xs">{{ $comment->user->name }}
+                                <small class="text-right font-thin">{{ $comment->updated_at->diffForHumans() }}</small>
+                            </p>
+                            <span class="text-xs text-gray-700">{{ $comment->content }}</span>
+                        </div>
+                    </div>
+                    @endforeach
+
+                    <form method="POST" action="{{ route('createcomment') }}">
+                        @csrf
+                        <input type="text" class="rounded-md w-full mb-1 border-2 focus:outline-none p-2 text-xs"
+                            placeholder="Add a comment..." name="content">
+                        <input type="hidden" name="post_id" value="{{ $post->id }}">
+                        <div class="flex space-x-3 text-gray-500 text-sm font-thin"><button type="submit"
+                                class="flex-1 flex items-center h-8 focus:outline-none focus:bg-gray-200 justify-center space-x-2 hover:bg-gray-100 rounded-md">
+                                <div><i class="fas fa-comment"></i></div>
+                                <div>
+                                    <p class="font-semibold">Comment</p>
+                                </div>
+                            </button></div>
+                    </form>
+
                 </div>
             </div>
             @endforeach
