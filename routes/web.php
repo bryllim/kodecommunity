@@ -22,7 +22,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard')->with('posts', Post::orderBy('updated_at', 'desc')->get());
+    return view('dashboard')->with('posts', Post::orderBy('updated_at', 'desc')->paginate(5));
 })->middleware(['auth'])->name('dashboard');
 
 // Posts

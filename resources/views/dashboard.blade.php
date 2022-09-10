@@ -75,6 +75,8 @@
                 </div>
             </div>
             @endforeach
+            
+            <div>{{ $posts->render() }}</div>
         </div>
         <div>
             <div class="w-full shadow h-auto bg-white rounded-md">

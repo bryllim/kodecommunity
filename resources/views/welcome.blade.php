@@ -77,7 +77,6 @@
                     careers.</div>
             </div>
             <!-- End Main Hero Content -->
-
         </div>
     </section>
     <section class="text-gray-700 bg-white body-font tails-selected-element">
