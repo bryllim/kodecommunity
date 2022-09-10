@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostsController;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +20,13 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard')->with('posts', Post::all());
 })->middleware(['auth'])->name('dashboard');
+
+// Posts
+
+Route::post('createpost', 
+    [PostsController::class, 'create']
+)->name('createpost');
 
 require __DIR__.'/auth.php';
