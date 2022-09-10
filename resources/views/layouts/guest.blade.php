@@ -9,8 +9,6 @@
 
         <script src="https://cdn.tailwindcss.com"></script>
     
-        <!-- Scripts -->
-        @vite(['resources/js/app.js'])
     </head>
     <body>
         <div>
