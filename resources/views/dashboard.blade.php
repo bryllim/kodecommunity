@@ -102,6 +102,12 @@
                         <p class="font-semibold text-sm text-gray-700">{{ Auth::user()->name }}</p><span
                             class="text-xs font-thin text-gray-400">{{ Auth::user()->email }}</span>
                     </div>
+                    <div class="flex space-x-3 rounded-md bg-gray-100 text-white text-sm font-thin"><button class="flex-1 flex items-center h-8 space-x-200 rounded-md">
+                                <div>
+                                    <p class="text-gray-700 font-semibold px-5">Edit Profile Photo</p>
+                                </div>
+                            </button>
+                        </div>
                 </div>
                 <hr class="mt-4">
                 <form method="POST" action="{{ route('createpost') }}">
@@ -112,7 +118,7 @@
                         <div class="flex space-x-3 rounded-md bg-blue-500 text-white text-sm font-thin"><button
                                 type="submit" class="flex-1 flex items-center h-8 space-x-200 rounded-md">
                                 <div>
-                                    <p class="font-semibold pl-5"><i class="fa-regular fa-pen-to-square"></i>Create Post
+                                    <p class="font-semibold pl-5">Create Post
                                     </p>
                                 </div>
                             </button>
