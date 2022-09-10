@@ -40,8 +40,8 @@
                     <p class="text-gray-700 px-3 text-sm">{{ $post->content }}</p>
                 </div>
                 <div class="w-full flex flex-col space-y-2 p-2 px-4">
-                    <div class="flex items-center justify-between pb-2 border-b border-gray-300 text-gray-500 text-sm">
-                        <div class="flex items-center space-x-2"><button>52 Comments</button>
+                    <div class="flex items-center justify-between pb-2 border-b border-gray-300 text-gray-500 text-xs">
+                        <div class="flex items-center space-x-2"><button>{{ count($post->comments) }} {{ (count($post->comments)==1)?'comment':'comments' }}</button>
                         </div>
                     </div>
 
