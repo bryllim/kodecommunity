@@ -37,7 +37,7 @@
                     @endif
                 </div>
                 <div class="mb-1">
-                    <p class="text-gray-700 px-3 text-sm">{{ $post->content }}</p>
+                    <p class="text-gray-700 px-3 text-sm">{!! $post->content !!}</p>
                 </div>
                 <div class="w-full flex flex-col space-y-2 p-2 px-4">
                     <div class="flex items-center justify-between pb-2 border-b border-gray-300 text-gray-500 text-xs">
@@ -75,7 +75,6 @@
                 </div>
             </div>
             @endforeach
-            
             <div>{{ $posts->render() }}</div>
         </div>
         <div>
