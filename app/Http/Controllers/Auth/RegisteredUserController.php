@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Storage;
 
 class RegisteredUserController extends Controller
 {
@@ -21,6 +22,31 @@ class RegisteredUserController extends Controller
     public function create()
     {
         return view('auth.register');
+    }
+
+    public function uploadprofile(Request $request)
+    {
+        if($request->hasfile('profile_path')){
+
+            // deletes the existing profile in the server storage
+            Storage::disk('public')->delete("images/".Auth::user()->profile_path);
+
+            // generate random filename string
+            $imageName = time().rand(1, 100).".".$request->file('profile_path')->extension();
+
+            // store filename to user
+            $user = User::find(Auth::user()->id);
+            $user->profile_path = $imageName;
+            $user->save();
+
+            // store image to server
+            $request->file('profile_path')->storeAs('images', $imageName, 'public');
+            
+            return redirect()->route('dashboard')->with('success', 'Profile updated.');
+            
+        }else{
+            return redirect()->route('dashboard')->with('success', 'No image detected.');
+        }
     }
 
     /**

@@ -17,7 +17,7 @@
             @foreach($posts as $post)
             <div class="w-full shadow h-auto bg-white rounded-md mb-3">
                 <div class="flex items-center space-x-2 p-2.5 px-4">
-                    <div class="w-10 h-10"><img src="https://cdn-icons-png.flaticon.com/512/1803/1803671.png"
+                    <div class="w-10 h-10"><img src="{{ url('storage/images/'.$post->user->profile_path) }}"
                             class="w-full h-full rounded-full" alt="dp"></div>
                     <div class="flex-grow flex flex-col">
                         <p class="font-semibold text-sm text-gray-700">{{ $post->user->name }}</p><span
@@ -50,7 +50,7 @@
 
                     @foreach($post->comments as $comment)
                     <div class="flex items-center space-x-2 p-1 px-4 bg-gray-100 rounded-md">
-                        <div class="w-7 h-7"><img src="https://cdn-icons-png.flaticon.com/512/1803/1803671.png"
+                        <div class="w-7 h-7"><img src="{{ url('storage/images/'.$comment->user->profile_path) }}"
                                 class="w-full h-full rounded-full" alt="dp"></div>
                         <div class="flex-grow flex flex-col">
                             <p class="font-semibold text-xs">{{ $comment->user->name }}
@@ -96,18 +96,21 @@
         <div>
             <div class="w-full shadow h-auto bg-white rounded-md">
                 <div class="flex items-center space-x-2 p-2.5 px-4">
-                    <div class="w-10 h-10"><img src="https://cdn-icons-png.flaticon.com/512/1803/1803671.png"
+                    <div class="w-10 h-10"><img src="{{ url('storage/images/'.Auth::user()->profile_path) }}"
                             class="w-full h-full rounded-full" alt="dp"></div>
                     <div class="flex-grow flex flex-col">
                         <p class="font-semibold text-sm text-gray-700">{{ Auth::user()->name }}</p><span
                             class="text-xs font-thin text-gray-400">{{ Auth::user()->email }}</span>
                     </div>
-                    <div class="flex space-x-3 rounded-md bg-gray-100 text-white text-sm font-thin"><button class="flex-1 flex items-center h-8 space-x-200 rounded-md">
-                                <div>
+                    <form method="POST" action="{{ route('uploadprofile') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="flex space-x-3 rounded-md bg-gray-100 text-white text-sm font-thin">
+                            <input onchange="form.submit()" id="image_file" style="display:none" class="flex-1 flex items-center h-8 space-x-200 rounded-md" type="file" name="profile_path" required>
+                            <button onclick="document.getElementById('image_file').click();" class="flex-1 flex items-center h-8 space-x-200 rounded-md">
                                     <p class="text-gray-700 font-semibold px-5">Edit Profile Photo</p>
-                                </div>
                             </button>
                         </div>
+                    </form>
                 </div>
                 <hr class="mt-4">
                 <form method="POST" action="{{ route('createpost') }}">

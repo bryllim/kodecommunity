@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Models\Post;
 use App\Models\Comment;
 
@@ -41,5 +42,10 @@ Route::post('createcomment',
     [CommentController::class, 'create']
 )->name('createcomment');
 
+
+// Profile picture upload
+Route::post('uploadprofile',
+    [RegisteredUserController::class, 'uploadprofile']
+)->name('uploadprofile');
 
 require __DIR__.'/auth.php';
